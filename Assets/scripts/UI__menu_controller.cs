@@ -29,12 +29,12 @@ public class UI__menu_controller : MonoBehaviour
     }
 
     public void action_podium_open(){
-        ui_settings.SetActive(true);
+        ui_podium.SetActive(true);
         ui_main_menu.SetActive(false);
     }
 
     public void action_podium_close(){
-        ui_settings.SetActive(false);
+        ui_podium.SetActive(false);
         ui_main_menu.SetActive(true);
     }
 
