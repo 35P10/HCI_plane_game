@@ -8,7 +8,7 @@ using System;
 public class game__stadistics : MonoBehaviour{
     public GameObject ui__txt_points;
     public GameObject ui__timer_seconds, ui__timer_minutes;
-    public static int max_time = 120;
+    public static int max_time = 10;
     private static int minutes;
     private static int seconds; 
     public static int count_points = 0;
@@ -19,22 +19,20 @@ public class game__stadistics : MonoBehaviour{
         minutes = max_time/60;
         seconds = max_time%60;
          time_over = false;
+         InvokeRepeating("timer", 0f, 1f);
     }
 
     private void Update() {
-        timer();
-        max_time -= max_time;   
         TMP_Text_points = ui__txt_points.GetComponent<TMP_Text>();
-        TMP_Text_points.text = (count_points).ToString();;
+        TMP_Text_points.text = (count_points).ToString();
     }
 
     private void timer(){
+        if(max_time>-1){
+        max_time -= 1;   
         ui__timer_minutes.GetComponent<TMP_Text>().text =minutes.ToString();
         ui__timer_seconds.GetComponent<TMP_Text>().text =seconds.ToString();
-        if(!time_over){
-            if(seconds==0 && minutes==0)
-                time_over=true;
-            else if(seconds==0){
+            if(seconds==0){
                 seconds=59;   
                 minutes--;
             }

@@ -17,7 +17,7 @@ public class UI__controller : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-        if(game__stadistics.time_over){
+        if(game__stadistics.max_time==-1){
             f_time_over();
         }
         if(Input.GetKeyDown(KeyCode.Escape)){
