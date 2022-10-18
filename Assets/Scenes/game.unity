@@ -309,6 +309,10 @@ MonoBehaviour:
   ui_win: {fileID: 984873681}
   ui_pause: {fileID: 2007098466}
   ui_exitToMenu: {fileID: 1552498997}
+  ui_configuracion: {fileID: 1561180509}
+  ui_newScoreRecord: {fileID: 495861005}
+  ui_podio: {fileID: 761166634}
+  ui_reiniciar: {fileID: 1126676338}
   isPaused: 0
 --- !u!1 &319446776
 GameObject:
