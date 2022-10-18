@@ -4,30 +4,96 @@ using UnityEngine;
 
 public class player__movement : MonoBehaviour
 {
-    public static float speed=2f;
-    public static Vector3 pos_start;
-    public static Vector3 pos_curr;
+    private float maxSpeed = 0.6f;
+    private float currentYawSpeed;
+    private float currentPitchSpeed;
+    private float currentRollSpeed;
+    private float currentSpeed;
+
+    ////////////////////////////////////////////
+    // plane movement code by: HeneGames
+    ////////////////////////////////////////////
+
+    [Header("Rotating speeds")]
+    [Range(5f, 500f)]
+    [SerializeField] private float yawSpeed = 50f;
+
+    [Range(5f, 500f)]
+    [SerializeField] private float pitchSpeed = 100f;
+
+    [Range(5f, 500f)]
+    [SerializeField] private float rollSpeed = 200f;
+
+    [Header("Rotating speeds multiplers when turbo is used")]
+    [Range(0.1f, 5f)]
+    [SerializeField] private float yawTurboMultiplier = 0.3f;
+
+    [Range(0.1f, 5f)]
+    [SerializeField] private float pitchTurboMultiplier = 0.5f;
+
+    [Range(0.1f, 5f)]
+    [SerializeField] private float rollTurboMultiplier = 1f;
+
+    [Header("Moving speed")]
+    [Range(5f, 100f)]
+    [SerializeField] private float defaultSpeed = 10f;
+
+    [Range(10f, 200f)]
+    [SerializeField] private float turboSpeed = 20f;
+
+    [Range(0.1f, 50f)]
+    [SerializeField] private float accelerating = 10f;
+
+    [Range(0.1f, 50f)]
+    [SerializeField] private float deaccelerating = 5f;
 
     // Start is called before the first frame update
     void Start(){
-        pos_start=this.gameObject.transform.position;
+        ;
     }
 
     // Update is called once per frame
     void Update(){
-        transform.Translate(Vector3.forward * speed * Time.deltaTime,Space.Self);
-        //pos_curr = this.gameObject.transform.position;
-        if(Input.GetKey(KeyCode.A) && this.gameObject.transform.position.x > map__settings.left_limit)
-            transform.Translate(Vector3.left * Time.deltaTime * speed);
-        if(Input.GetKey(KeyCode.D) && this.gameObject.transform.position.x < map__settings.right_limit)
-            transform.Translate(Vector3.right * Time.deltaTime * speed);
-        if(Input.GetKey(KeyCode.W) && this.gameObject.transform.position.y < map__settings.up_limit)
-            transform.Translate(Vector3.up * Time.deltaTime * speed);
-        if(Input.GetKey(KeyCode.S) && this.gameObject.transform.position.y > map__settings.down_limit)
-            transform.Translate(Vector3.down * Time.deltaTime * speed);
-        if(Input.GetKey(KeyCode.Q) && this.gameObject.transform.position.y > map__settings.down_limit)
-            transform.Rotate(Vector3.forward * speed * Time.deltaTime);
-        if(Input.GetKey(KeyCode.E) && this.gameObject.transform.position.y > map__settings.down_limit)
-            transform.Rotate(Vector3.back * speed * Time.deltaTime);
+        Movement();
+    }
+
+    private void Movement(){
+        //Move forward
+        transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
+
+        //Rotate airplane by inputs
+        transform.Rotate(Vector3.forward * -Input.GetAxis("Horizontal") * currentRollSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.right * Input.GetAxis("Vertical") * currentPitchSpeed * Time.deltaTime);
+
+        //Rotate yaw
+        if(Input.GetKey(KeyCode.E)){
+            transform.Rotate(Vector3.up * currentYawSpeed * Time.deltaTime);
+        }
+        else if(Input.GetKey(KeyCode.Q)){
+                transform.Rotate(-Vector3.up * currentYawSpeed * Time.deltaTime);
+        }
+
+        if(currentSpeed < maxSpeed){
+            currentSpeed += accelerating * Time.deltaTime;
+        }
+        else {
+            currentSpeed -= deaccelerating * Time.deltaTime;
+        }
+
+        //Turbo
+        if (Input.GetKey(KeyCode.LeftShift)){
+            //Set speed to turbo speed and rotation to turbo values
+            maxSpeed = turboSpeed;
+            currentYawSpeed = yawSpeed * yawTurboMultiplier;
+            currentPitchSpeed = pitchSpeed * pitchTurboMultiplier;
+            currentRollSpeed = rollSpeed * rollTurboMultiplier;
+        }
+        else {
+            //Speed and rotation normal
+            maxSpeed = defaultSpeed;
+            currentYawSpeed = yawSpeed;
+            currentPitchSpeed = pitchSpeed;
+            currentRollSpeed = rollSpeed;
+        }
     }
 }
