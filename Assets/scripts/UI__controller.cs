@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class UI__controller : MonoBehaviour
 {
-    public GameObject ui_lose, ui_win, ui_pause, ui_exitToMenu;
+    public GameObject ui_lose, ui_win, ui_pause, ui_exitToMenu, ui_configuracion, ui_newScoreRecord, ui_podio, ui_reiniciar;
     public bool isPaused;
     // Start is called before the first frame update
     void Start(){
@@ -13,6 +13,10 @@ public class UI__controller : MonoBehaviour
         ui_win.SetActive(false);
         ui_pause.SetActive(false);
         ui_exitToMenu.SetActive(false);
+        ui_newScoreRecord.SetActive(false);
+        ui_configuracion.SetActive(false);
+        ui_podio.SetActive(false);
+        ui_reiniciar.SetActive(false);
     }
 
     // Update is called once per frame
@@ -39,6 +43,11 @@ public class UI__controller : MonoBehaviour
         ui_pause.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+    }
+
+    public void RestartGame(){
+        //aniadir default settings
+         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void ResumeGame(){
