@@ -6,7 +6,18 @@ using UnityEngine.SceneManagement;
 public class UI__controller : MonoBehaviour
 {
     public GameObject ui_lose, ui_win, ui_pause, ui_exitToMenu, ui_configuracion, ui_newScoreRecord, ui_podio, ui_reiniciar;
-    public bool isPaused;
+    /*
+        0 => game
+        1 => pause
+        2 => config_1
+        3 => config_2
+        4 => restart
+        5 => back to main menu
+    */
+    int focus_ui = 0;
+
+
+
     // Start is called before the first frame update
     void Start(){
         ui_lose.SetActive(false);
@@ -25,11 +36,21 @@ public class UI__controller : MonoBehaviour
             f_time_over();
         }
         if(Input.GetKeyDown(KeyCode.Escape)){
-            if(isPaused){
-                ResumeGame();
-            }
-            else {
-                PauseGame();
+            switch (focus_ui){
+                case 0:
+                    PauseGame();
+                    break;
+                case 1:
+                    ResumeGame();
+                    break;
+                case 4:
+                    restartGame_no();
+                    break;
+                case 5:
+                    exitGame_no();
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -42,7 +63,7 @@ public class UI__controller : MonoBehaviour
     public void PauseGame(){
         ui_pause.SetActive(true);
         Time.timeScale = 0f;
-        isPaused = true;
+        focus_ui=1;
     }
 
     public void RestartGame(){
@@ -53,14 +74,28 @@ public class UI__controller : MonoBehaviour
     public void ResumeGame(){
         ui_pause.SetActive(false);
         Time.timeScale = 1f;
-        isPaused = false;
+        focus_ui=0;
+    }
+
+
+    public void open_restartGame(){
+        ui_pause.SetActive(false);
+        ui_reiniciar.SetActive(true);
+        Time.timeScale = 0f;
+        focus_ui=4;
+    }
+
+    public void restartGame_no(){
+        ui_pause.SetActive(true);
+        ui_reiniciar.SetActive(false);
+        focus_ui=1;
     }
 
     public void open_exitGame(){
         ui_pause.SetActive(false);
         ui_exitToMenu.SetActive(true);
         Time.timeScale = 0f;
-        isPaused = true;
+        focus_ui=5;
     }
 
     public void exitGame_yes(){
@@ -70,6 +105,7 @@ public class UI__controller : MonoBehaviour
     public void exitGame_no(){
         ui_exitToMenu.SetActive(false);
         ui_pause.SetActive(true);
+        focus_ui=1;
     }
 
     void you_win(){
