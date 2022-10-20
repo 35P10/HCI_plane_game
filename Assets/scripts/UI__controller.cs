@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
+using TMPro;
+using System;
 
 public class UI__controller : MonoBehaviour
 {
-    public GameObject ui_lose, ui_win, ui_pause, ui_exitToMenu, ui_configuracion, ui_newScoreRecord, ui_podio, ui_reiniciar;
+    public GameObject ui_lose, ui_win, ui_text_score, ui_pause, ui_exitToMenu, ui_configuracion, ui_newScoreRecord, ui_podio, ui_reiniciar;
     /*
         0 => game
         1 => pause
@@ -15,6 +18,7 @@ public class UI__controller : MonoBehaviour
         5 => back to main menu
     */
     int focus_ui = 0;
+    private TMP_Text  TMP_Text_score;
 
 
 
@@ -34,6 +38,9 @@ public class UI__controller : MonoBehaviour
     void Update(){
         if(game__stadistics.max_time==-1){
             f_time_over();
+        }
+        else if(game__stadistics.count_points == game__stadistics.total_points){
+            you_win();
         }
         if(Input.GetKeyDown(KeyCode.Escape)){
             switch (focus_ui){
@@ -111,5 +118,6 @@ public class UI__controller : MonoBehaviour
     void you_win(){
         ui_win.SetActive(true);
         Time.timeScale = 0f;
+        ui_text_score.GetComponent<TMP_Text>().text = game__stadistics.minutes.ToString() + " : " + game__stadistics.seconds.ToString() ;
     }
 }
