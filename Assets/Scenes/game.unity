@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -657,7 +657,7 @@ MonoBehaviour:
   ui_pause: {fileID: 2007098466}
   ui_exitToMenu: {fileID: 1552498997}
   ui_configuracion: {fileID: 1561180509}
-  ui_newScoreRecord: {fileID: 0}
+  ui_newScoreRecord: {fileID: 651782513}
   ui_podio: {fileID: 761166634}
   ui_reiniciar: {fileID: 145785029}
 --- !u!1 &145785029
@@ -677,7 +677,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &145785030
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1035,7 +1035,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -1830,7 +1829,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 429382283}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 105668376}
+        m_TargetAssemblyTypeName: UI__controller, Assembly-CSharp
+        m_MethodName: podium_exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &429382283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2733,7 +2744,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &651782514
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3314,7 +3325,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &761166635
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4154,7 +4165,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &984873682
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4446,7 +4457,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1007948435
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6106,7 +6117,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1258097663}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 105668376}
+        m_TargetAssemblyTypeName: UI__controller, Assembly-CSharp
+        m_MethodName: open_podium
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1258097663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7534,7 +7557,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1552498998
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7611,7 +7634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1561180510
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9336,7 +9359,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 105668376}
         m_TargetAssemblyTypeName: UI__controller, Assembly-CSharp
-        m_MethodName: RestartGame
+        m_MethodName: restartGame_no
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10521,7 +10544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2126101669
 RectTransform:
   m_ObjectHideFlags: 0

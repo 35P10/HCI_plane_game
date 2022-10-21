@@ -16,6 +16,7 @@ public class UI__controller : MonoBehaviour
         3 => config_2
         4 => restart
         5 => back to main menu
+        6 => podium
     */
     int focus_ui = 0;
     private TMP_Text  TMP_Text_score;
@@ -55,6 +56,9 @@ public class UI__controller : MonoBehaviour
                     break;
                 case 5:
                     exitGame_no();
+                    break;
+                case 6:
+                    podium_exit();
                     break;
                 default:
                     break;
@@ -111,6 +115,18 @@ public class UI__controller : MonoBehaviour
 
     public void exitGame_no(){
         ui_exitToMenu.SetActive(false);
+        ui_pause.SetActive(true);
+        focus_ui=1;
+    }
+
+    public void open_podium(){
+        ui_pause.SetActive(false);
+        ui_podio.SetActive(true);
+        focus_ui=6;
+    }
+
+    public void podium_exit(){
+        ui_podio.SetActive(false);
         ui_pause.SetActive(true);
         focus_ui=1;
     }
