@@ -37,7 +37,7 @@ public class UI__controller : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-        if(game__stadistics.max_time==-1){
+        if(game__stadistics.max_time==-1 || player__status.fuel < 0){
             f_time_over();
         }
         else if(game__stadistics.count_points == game__stadistics.total_points){

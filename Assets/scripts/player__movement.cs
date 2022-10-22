@@ -8,7 +8,7 @@ public class player__movement : MonoBehaviour
     private float currentYawSpeed;
     private float currentPitchSpeed;
     private float currentRollSpeed;
-    private float currentSpeed;
+    static public float currentSpeed;
 
     ////////////////////////////////////////////
     // plane movement code by: HeneGames
