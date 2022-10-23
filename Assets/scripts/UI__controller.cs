@@ -51,6 +51,9 @@ public class UI__controller : MonoBehaviour
                 case 1:
                     ResumeGame();
                     break;
+                case 2:
+                    config_exit();
+                    break;
                 case 4:
                     restartGame_no();
                     break;
@@ -123,6 +126,18 @@ public class UI__controller : MonoBehaviour
         ui_pause.SetActive(false);
         ui_podio.SetActive(true);
         focus_ui=6;
+    }
+
+    public void open_config(){
+        ui_pause.SetActive(false);
+        ui_configuracion.SetActive(true);
+        focus_ui=2;
+    }
+
+    public void config_exit(){
+        ui_configuracion.SetActive(false);
+        ui_pause.SetActive(true);
+        focus_ui=1;
     }
 
     public void podium_exit(){
