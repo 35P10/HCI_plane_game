@@ -8,11 +8,11 @@ using System;
 public class game__stadistics : MonoBehaviour{
     public GameObject ui__txt_points;
     public GameObject ui__timer_seconds, ui__timer_minutes;
-    public static int max_time = 120;
+    public static int max_time = 10;
     public static int minutes;
     public static int seconds; 
     public static int count_points = 0;
-    public static int total_points = 10;
+    public static int total_points = 2;
     public static bool time_over;
     private TMP_Text  TMP_Text_points;
     
@@ -24,20 +24,20 @@ public class game__stadistics : MonoBehaviour{
     }
 
     private void Update() {
-        TMP_Text_points = ui__txt_points.GetComponent<TMP_Text>();
-        TMP_Text_points.text = (count_points).ToString();
+        ui__txt_points.GetComponent<TMP_Text>().text = (count_points).ToString();
     }
 
     private void timer(){
-        if(max_time>-1){
+        if(max_time>0 && !time_over){
             max_time -= 1;   
-            ui__timer_minutes.GetComponent<TMP_Text>().text = minutes.ToString();
-            ui__timer_seconds.GetComponent<TMP_Text>().text = seconds.ToString();
             if(seconds==59){
                 seconds=00;   
                 minutes++;
             }
             seconds++;
+            ui__timer_minutes.GetComponent<TMP_Text>().text = minutes.ToString();
+            ui__timer_seconds.GetComponent<TMP_Text>().text = seconds.ToString();
         }
+        else time_over = true;
     }
 }
