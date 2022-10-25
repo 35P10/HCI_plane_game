@@ -34,13 +34,13 @@ public class UI__controller : MonoBehaviour
 
     // Update is called once per frame
     void Update(){
-        if(game__stadistics.time_over || player__status.fuel < 0){
+        if(game__stadistics.game_over){
             game_over("PERDISTE");
         }
         else if(game__stadistics.count_points == game__stadistics.total_points){
             game_over("GANASTE");
         }
-        if(Input.GetKeyDown(KeyCode.Escape)){
+        if(!game__stadistics.game_over && Input.GetKeyDown(KeyCode.Escape)){
             switch (focus_ui){
                 case 0:
                     PauseGame();

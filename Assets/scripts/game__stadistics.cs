@@ -13,13 +13,13 @@ public class game__stadistics : MonoBehaviour{
     public static int seconds; 
     public static int count_points = 0;
     public static int total_points = 2;
-    public static bool time_over;
+    public static bool game_over;
     private TMP_Text  TMP_Text_points;
     
     private void Start() {
         minutes = 00;
         seconds = 00;
-        time_over = false;
+        game_over = false;
         InvokeRepeating("timer", 0f, 1f);
     }
 
@@ -28,7 +28,7 @@ public class game__stadistics : MonoBehaviour{
     }
 
     private void timer(){
-        if(max_time>0 && !time_over){
+        if(max_time>0 && !game_over){
             max_time -= 1;   
             if(seconds==59){
                 seconds=00;   
@@ -38,6 +38,6 @@ public class game__stadistics : MonoBehaviour{
             ui__timer_minutes.GetComponent<TMP_Text>().text = minutes.ToString();
             ui__timer_seconds.GetComponent<TMP_Text>().text = seconds.ToString();
         }
-        else time_over = true;
+        else game_over = true;
     }
 }
