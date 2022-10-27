@@ -43,6 +43,7 @@ public class UI__menu_controller : MonoBehaviour
     }
 
     public void action_startGame(){
+        UI__controller.RestartGame();
         SceneManager.LoadScene("game");
     }
 

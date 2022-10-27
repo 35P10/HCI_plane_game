@@ -9,6 +9,7 @@ public class player__movement : MonoBehaviour
     private float currentPitchSpeed;
     private float currentRollSpeed;
     static public float currentSpeed;
+    public static Vector3 last_checkpoint;
 
     ////////////////////////////////////////////
     // plane movement code by: HeneGames
@@ -49,7 +50,7 @@ public class player__movement : MonoBehaviour
 
     // Start is called before the first frame update
     void Start(){
-        ;
+        last_checkpoint = transform.position;
     }
 
     // Update is called once per frame

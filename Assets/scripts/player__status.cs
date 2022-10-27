@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class player__status : MonoBehaviour{
     public GameObject obj__row_fuel;
-    public static Vector3 last_checkpoint = Vector3.zero;
     public static float default_fuel  = 50000;
     public static float fuel;
 
@@ -13,10 +12,14 @@ public class player__status : MonoBehaviour{
     }
 
     private void Update() {
-        if(player__status.fuel > 0){
+        if(fuel > 0){
             fuel -= player__movement.currentSpeed;
             obj__row_fuel.transform.localRotation = Quaternion.Euler(0, 140 * fuel / default_fuel, 0);
         }
         else game__stadistics.game_over = true; 
+    }
+
+    public static void Restore(){
+        fuel = default_fuel;
     }
 }

@@ -18,7 +18,7 @@ public class UI__controller : MonoBehaviour
         5 => back to main menu
         6 => podium
     */
-    int focus_ui = 0;
+    int focus_ui;
     private TMP_Text  TMP_Text_score;
 
     // Start is called before the first frame update
@@ -30,6 +30,7 @@ public class UI__controller : MonoBehaviour
         ui_podio.SetActive(false);
         ui_reiniciar.SetActive(false);
         ui_gameover.SetActive(false);
+        focus_ui = 0;
     }
 
     // Update is called once per frame
@@ -86,9 +87,12 @@ public class UI__controller : MonoBehaviour
         focus_ui=1;
     }
 
-    public void RestartGame(){
+    public static void RestartGame(){
         //aniadir default settings
-         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        game__stadistics.Restore();
+        player__status.Restore();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
     }
 
     public void ResumeGame(){

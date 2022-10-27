@@ -6,13 +6,16 @@ using TMPro;
 using System;
 
 public class game__stadistics : MonoBehaviour{
+
+    public static int default_max_time = 400;
+    public static int total_points = 10;
+
     public GameObject ui__txt_points;
     public GameObject ui__timer_seconds, ui__timer_minutes;
-    public static int max_time = 10;
+    public static int max_time;
     public static int minutes;
     public static int seconds; 
     public static int count_points = 0;
-    public static int total_points = 2;
     public static bool game_over;
     private TMP_Text  TMP_Text_points;
     
@@ -20,6 +23,7 @@ public class game__stadistics : MonoBehaviour{
         minutes = 00;
         seconds = 00;
         game_over = false;
+        max_time = default_max_time;
         InvokeRepeating("timer", 0f, 1f);
     }
 
@@ -39,5 +43,13 @@ public class game__stadistics : MonoBehaviour{
             ui__timer_seconds.GetComponent<TMP_Text>().text = seconds.ToString();
         }
         else game_over = true;
+    }
+
+    public static void Restore(){
+        count_points = 0;
+        minutes = 00;
+        seconds = 00;
+        game_over = false;
+        max_time = default_max_time;
     }
 }
