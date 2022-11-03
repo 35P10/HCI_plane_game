@@ -16,7 +16,7 @@ public class player__status : MonoBehaviour{
             fuel -= player__movement.currentSpeed;
             obj__row_fuel.transform.localRotation = Quaternion.Euler(0, 140 * fuel / default_fuel, 0);
         }
-        else game__stadistics.game_over = true; 
+        else game__stadistics.game_over = true;
     }
 
     public static void Restore(){

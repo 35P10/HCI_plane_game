@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class player__movement : MonoBehaviour
 {
+
     private float maxSpeed = 0.6f;
     private float currentYawSpeed;
     private float currentPitchSpeed;
     private float currentRollSpeed;
     static public float currentSpeed;
     public static Vector3 last_checkpoint;
+
+    [Header("Controller")]
+    public OVRInput.Button LeftButton;
+    public OVRInput.Button RightButton;
 
     ////////////////////////////////////////////
     // plane movement code by: HeneGames
@@ -67,10 +72,10 @@ public class player__movement : MonoBehaviour
         transform.Rotate(Vector3.right * Input.GetAxis("Vertical") * currentPitchSpeed * Time.deltaTime);
 
         //Rotate yaw
-        if(Input.GetKey(KeyCode.E)){
+        if(Input.GetKey(KeyCode.E) || OVRInput.Get(RightButton)){
             transform.Rotate(Vector3.up * currentYawSpeed * Time.deltaTime);
         }
-        else if(Input.GetKey(KeyCode.Q)){
+        else if(Input.GetKey(KeyCode.Q) || OVRInput.Get(LeftButton)){
                 transform.Rotate(-Vector3.up * currentYawSpeed * Time.deltaTime);
         }
 

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - tag_point
   - tag_obstacle
+  - tag_hand
   layers:
   - Default
   - TransparentFX
@@ -13,8 +14,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - hands
+  - interactive
   - 
   - 
   - 

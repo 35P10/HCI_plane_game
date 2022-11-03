@@ -8,6 +8,11 @@ using System;
 
 public class UI__controller : MonoBehaviour
 {
+    [Header("Controller")]
+    public OVRInput.Button pauseButton;
+
+
+    [Header("Objects")]
     public GameObject ui_text_score, ui_pause, ui_exitToMenu, ui_configuracion, ui_newScoreRecord, ui_podio, ui_reiniciar, ui_gameover ,ui_text_gameover_title, ui_text_gameover_score;
     /*
         0 => game
@@ -41,7 +46,7 @@ public class UI__controller : MonoBehaviour
         else if(game__stadistics.count_points == game__stadistics.total_points){
             game_over("GANASTE");
         }
-        if(!game__stadistics.game_over && Input.GetKeyDown(KeyCode.Escape)){
+        if(!game__stadistics.game_over && (Input.GetKeyDown(KeyCode.Escape) || Button_VR.button_pause_isPressed) || OVRInput.GetDown(pauseButton)){
             switch (focus_ui){
                 case 0:
                     PauseGame();
