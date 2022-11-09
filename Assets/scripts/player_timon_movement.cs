@@ -60,7 +60,6 @@ public class player_timon_movement : MonoBehaviour
     private float currentPitchSpeed;
     private float currentRollSpeed;
     static public float currentSpeed;
-    public static Vector3 last_checkpoint;
     private Quaternion currentRot;
     private Vector3 default_controlWheel_position;
     private Quaternion pressPoint;
@@ -70,10 +69,14 @@ public class player_timon_movement : MonoBehaviour
     private Quaternion initialObjectRotation;
     private Quaternion initialControllerRotation;
     private bool set = false;
+
+    public static Vector3 last_checkpoint;
+    public static Vector3 current_position;
+
  
     private void Start(){
         last_checkpoint = player.transform.position;
-
+        current_position  = player.transform.position;
 
         offsetSet = false;
         default_controlWheel_position = controlWheel.transform.localEulerAngles;
@@ -81,6 +84,8 @@ public class player_timon_movement : MonoBehaviour
  
     // Update is called once per frame
     void Update(){
+
+        current_position  = player.transform.position;
 
         //mover hacia adelante
         player.transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
@@ -139,12 +144,12 @@ public class player_timon_movement : MonoBehaviour
             Vector3 v = newQuaternion.ToEulerAngles();
             player.transform.Rotate(v * currentPitchSpeed * Time.deltaTime);
 
-/*
+
             //player rotation
             Quaternion newQuaternion2 = new Quaternion();
             newQuaternion2.Set(controllerAngularDifference.z, 0, 0, 1);
             v = newQuaternion2.ToEulerAngles();
-            player.transform.Rotate(v * currentPitchSpeed * Time.deltaTime);*/
+            player.transform.Rotate(v * currentPitchSpeed * Time.deltaTime);
         }         
         else{
             set = false;
