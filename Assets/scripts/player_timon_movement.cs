@@ -71,11 +71,13 @@ public class player_timon_movement : MonoBehaviour
     private bool set = false;
 
     public static Vector3 last_checkpoint;
+    public static Quaternion last_checkpoint_rot;
     public static Vector3 current_position;
 
  
     private void Start(){
         last_checkpoint = player.transform.position;
+        last_checkpoint_rot = player.transform.rotation;
         current_position  = player.transform.position;
 
         offsetSet = false;
@@ -137,7 +139,7 @@ public class player_timon_movement : MonoBehaviour
             //controlWheel rotation z axis + player movement
             Quaternion controllerAngularDifference = initialControllerRotation * Quaternion.Inverse(hand.transform.rotation);
             Quaternion newQuaternion = new Quaternion();
-            newQuaternion.Set(0,  0, controllerAngularDifference.y, 1);
+            newQuaternion.Set(controllerAngularDifference.z,  0, controllerAngularDifference.y, 1);
             controlWheel.transform.localRotation = newQuaternion * initialObjectRotation;
 
             newQuaternion.Set(0, 0, controllerAngularDifference.y, 1);

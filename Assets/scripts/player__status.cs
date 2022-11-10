@@ -13,7 +13,7 @@ public class player__status : MonoBehaviour{
 
     private void Update() {
         if(fuel > 0){
-            fuel -= player__movement.currentSpeed;
+            fuel -= player_timon_movement.currentSpeed;
             obj__row_fuel.transform.localRotation = Quaternion.Euler(0, 140 * fuel / default_fuel, 0);
         }
         else game__stadistics.game_over = true;

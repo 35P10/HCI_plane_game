@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class player__collision : MonoBehaviour
 {
+    public AudioClip point_collision_audio;
+
     void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == "tag_point"){
             other.gameObject.SetActive(false);
             game__stadistics.count_points += 1;
-            player__movement.last_checkpoint = transform.position;
+            player_timon_movement.last_checkpoint = transform.position;
+            player_timon_movement.last_checkpoint_rot = transform.rotation;
+            AudioSource.PlayClipAtPoint(point_collision_audio, transform.position);
         }
 
         if (other.gameObject.tag == "tag_obstacle"){
             Debug.Log("Collision!!!!");
-            transform.position = player__movement.last_checkpoint;
+            transform.position = player_timon_movement.last_checkpoint;
+            transform.rotation = player_timon_movement.last_checkpoint_rot;
         }
     }
 }
