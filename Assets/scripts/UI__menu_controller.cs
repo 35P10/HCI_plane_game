@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class UI__menu_controller : MonoBehaviour
 {
-    public GameObject ui_main_menu, ui_settings , ui_podium , ui_exit;
+    public GameObject ui_main_menu, ui_settings , ui_podium , ui_exit, ui_loading;
     /*
         1 => main menu
         2 => config_1
@@ -19,6 +19,7 @@ public class UI__menu_controller : MonoBehaviour
         ui_exit.SetActive(false);
         ui_settings.SetActive(false);
         ui_podium.SetActive(false);
+        ui_loading.SetActive(false);
         ui_main_menu.SetActive(true);
         focus_ui = 1;
     }
@@ -85,5 +86,15 @@ public class UI__menu_controller : MonoBehaviour
 
     public void action_exit_yes(){
         Application.Quit();
+    }
+
+    public void saving(){
+        ui_loading.SetActive(true);
+        StartCoroutine(saving_loading(3f));
+    }
+
+    private IEnumerator saving_loading(float waitTime){
+        yield return new WaitForSeconds(waitTime);
+        ui_loading.SetActive(false);
     }
 }
