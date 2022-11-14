@@ -8,12 +8,12 @@ public class map__generator : MonoBehaviour{
     public GameObject[] section;
 
     [Header("Section parameters")]    
-    public int width = 60;
-    public int depth  = 60;
+    public float width = 60;
+    public float depth  = 60;
 
     [Header("Section parameters")]
-    public int inset_trigger = 60;
-    public int xPos_generation = 0;
+    public float inset_trigger = 60;
+    public float xPos_generation = 0;
 
     private int selectSection;
     private float zPos;
@@ -30,7 +30,7 @@ public class map__generator : MonoBehaviour{
     }
 
     IEnumerator GenerateSection(){
-        selectSection=Random.Range(0,2);
+        selectSection=Random.Range(0,1);
         Instantiate(section[selectSection], new Vector3(xPos_generation,0,zPos),Quaternion.identity);
         zPos += depth;
         yield return new WaitForSeconds(10);

@@ -7,6 +7,8 @@ TagManager:
   - tag_point
   - tag_obstacle
   - tag_hand
+  - tag_l_hand
+  - tag_r_hand
   layers:
   - Default
   - TransparentFX
