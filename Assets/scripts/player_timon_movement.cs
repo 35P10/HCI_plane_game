@@ -8,24 +8,28 @@ public class player_timon_movement : MonoBehaviour
     public GameObject ui_warming_boundary;
 
     [Header("Controller")]
-    public OVRInput.Button grabButton;    
+    public OVRInput.Button grabButton;
+    public OVRInput.Button RgrabButton;        
     public OVRInput.Button LeftPedal;
     public OVRInput.Button RightPedal;
 
     [Header("controlWheel")]
     public GameObject controlWheel;
+    public GameObject throttle;
 
     [Header("player")]
     public GameObject player;
 
     [Header("hand")]
     public GameObject hand;
+    public GameObject handR;
     
  
     [Header("Activation Settings")]
     public float activationDistance;
 
     public static bool isTouchIt;
+    public static bool isTouchIt2;
  
 
     [Header("Rotating speeds")]
@@ -67,12 +71,17 @@ public class player_timon_movement : MonoBehaviour
     private float currentRollSpeed;
     static public float currentSpeed;
     private Vector3 default_controlWheel_position;
+    private Vector3 default_throttle_position;
     private bool offsetSet;
     public float RotationSpeed = 5;
 
     private Quaternion initialObjectRotation;
     private Quaternion initialControllerRotation;
+    private Quaternion RinitialObjectRotation;
+    private Quaternion RinitialControllerRotation;
+
     private bool set = false;
+    private bool Rset = false;
 
     public static Vector3 last_checkpoint;
     public static Quaternion last_checkpoint_rot;
@@ -84,6 +93,7 @@ public class player_timon_movement : MonoBehaviour
         last_checkpoint_rot = player.transform.rotation;
         current_position  = player.transform.position;
         isTouchIt = false;
+        isTouchIt2 = false;
         offsetSet = false;
         default_controlWheel_position = controlWheel.transform.localEulerAngles;
         ui_warming_boundary.SetActive(false);
@@ -145,30 +155,49 @@ public class player_timon_movement : MonoBehaviour
             Quaternion controllerAngularDifference = initialControllerRotation * Quaternion.Inverse(hand.transform.rotation);
             Quaternion newQuaternion = new Quaternion();
 
-            newQuaternion.Set(controllerAngularDifference.y,  0, -Mathf.Abs(controllerAngularDifference.z), 1);
+            newQuaternion.Set(0,  0, -controllerAngularDifference.z, 1);
             controlWheel.transform.localRotation = newQuaternion * initialObjectRotation;
             
             
-            newQuaternion.Set(0, 0, -Mathf.Abs(controllerAngularDifference.z), 1);
+            newQuaternion.Set(0, 0, -controllerAngularDifference.z, 1);
             Vector3 v = newQuaternion.ToEulerAngles();
             player.transform.Rotate(v * currentPitchSpeed * Time.deltaTime);
  
-
-            // Move the object upward in world space 1 unit/second.
-            //player rotation
-            Quaternion newQuaternion2 = new Quaternion();
-            newQuaternion2.Set(controllerAngularDifference.y, 0, 0, 1);
-            v = newQuaternion2.ToEulerAngles();
-            player.transform.Rotate(v * currentPitchSpeed * Time.deltaTime);
-            
         }         
         else{
             set = false;
             controlWheel.transform.localEulerAngles = default_controlWheel_position;
         }
 
+        if (OVRInput.Get(RgrabButton) && isTouchIt2) {
+            if(Rset == false){
+                RinitialObjectRotation= throttle.transform.localRotation;
+                RinitialControllerRotation = handR.transform.rotation;
+                Rset = true;
+            }
 
-        if(player.transform.position.x > 88 || player.transform.position.x < 8 ){
+            //controlWheel rotation z axis + player movement
+            Quaternion controllerAngularDifference = RinitialControllerRotation * Quaternion.Inverse(handR.transform.rotation);
+            Quaternion newQuaternion = new Quaternion();
+
+            newQuaternion.Set( controllerAngularDifference.y,  0, 0, 1);
+            throttle.transform.localRotation = newQuaternion * RinitialObjectRotation;
+
+            Quaternion newQuaternion2 = new Quaternion();
+            newQuaternion2.Set(controllerAngularDifference.y, 0, 0, 1);
+            Vector3 v = newQuaternion2.ToEulerAngles();
+            player.transform.Rotate(v * currentPitchSpeed * Time.deltaTime);
+
+        }
+        else{
+            Rset = false;
+            throttle.transform.localEulerAngles = default_throttle_position;
+        }
+
+
+        if(player.transform.position.x > 88 || player.transform.position.x < 8 || player.transform.position.y > -4.1 ){
+            isTouchIt = false;
+            isTouchIt2 = false;
             player.transform.position = last_checkpoint;
             player.transform.rotation = last_checkpoint_rot;
             ui_warming_boundary.SetActive(true);

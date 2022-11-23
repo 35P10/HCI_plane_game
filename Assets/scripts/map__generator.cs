@@ -31,7 +31,7 @@ public class map__generator : MonoBehaviour{
 
     IEnumerator GenerateSection(){
         selectSection=Random.Range(0,1);
-        Instantiate(section[selectSection], new Vector3(xPos_generation,0,zPos),Quaternion.identity);
+        Instantiate(section[selectSection], new Vector3(xPos_generation,-10,zPos),Quaternion.identity);
         zPos += depth;
         yield return new WaitForSeconds(10);
     }
