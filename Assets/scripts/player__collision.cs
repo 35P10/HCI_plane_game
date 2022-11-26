@@ -16,6 +16,8 @@ public class player__collision : MonoBehaviour
         }
 
         if (other.gameObject.tag == "tag_obstacle"){
+            player_timon_movement.isTouchIt = false;
+            player_timon_movement.isTouchIt2 = false;
             Debug.Log("Collision!!!!");
             transform.position = player_timon_movement.last_checkpoint;
             transform.rotation = player_timon_movement.last_checkpoint_rot;
